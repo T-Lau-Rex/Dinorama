@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">Dinorama</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_dino">Dinosaurs</string>
+    <string name="title_fav">Favorite</string>
+    <string name="title_profile">Profile</string>
+    <string name="logo_description">Logo de la app</string>
+    <string name="app_true_name">Dinorama</string>
+    <string name="long_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec tincidunt sem nibh id elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+
+At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
+
+Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Quod quidem nobis est expedita suscipit, est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</string>
+    <string name="back_description">arrow back</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="curious_data">Dato curioso del día</string>
+    <string name="title_popular">Top 10</string>
+    <string name="fav_image_description">Favorites Image</string>
+    <string name="popular_description">Los dinosaurios más top de la app</string>
+    <string name="login_title">Crea una nueva cuenta</string>
+    <string name="signin_title">Inicia sesión</string>
+    <string name="search_home_hint">Busca tus dinosaurios favoritos</string>
+    <string name="user_name_hint">Nombre de usuario</string>
+    <string name="email_hint">Correo</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login">Regístrate</string>
+    <string name="signin">Inicia sesión</string>
+    <string name="not_registered">¿No tienes cuenta en Dinorama?</string>
+    <string name="already_registered">¿Tienes cuenta en Dinorama?</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="deleteAccount">Eliminar cuenta</string>
+    <string name="txt_image_photo">Imagen de perfil</string>
+    <string name="btn_change">Cambiar</string>
+    <string name="btn_save">Guardar</string>
+    <string name="description_dinosaur">El Parasaurolophus vivió en el período Cretácico y recibe el sobrenombre de «dinosaurio trompeta», debido a que la cresta de Parasaurolophus podría haber amplificado los sonidos que emitía para comunicarse. Sin embargo, su cresta podría haber servido básicamente como rasgo identificativo visual.</string>
+    <string name="info_curiosity">Los dinosaurios son el grupo de animales terrestres dominantes que más tiempo ha habitado la Tierra, con un reinado de aproximadamente 165 millones de años, hasta su extinción hace alrededor de 66 millones de años. En términos de tiempo geológico, sería acertado afirmar que la Tierra podría considerarse el planeta de los dinosaurios.</string>
+
+    <string name="era">Era: </string>
+    <string name="cretacico">Cretácico</string>
+    <string name="orden">Orden: </string>
+    <string name="ornithischia">Ornithischia</string>
+    <string name="suborden">Suborden: </string>
+    <string name="neornithischia">Neornithischia</string>
+
+    <string name="dieta">Dieta: </string>
+    <string name="herbivoro">Herbívoro</string>
+    <string name="tamanyo">Tamaño: </string>
+    <string name="longitud">10 m long.</string>
+    <string name="peso">Peso: </string>
+    <string name="toneladas">2.5-3 T</string>
+    <string name="descubre">Descubre más sobre</string>
+    <string name="description_ilustration">Ilustración del dinosaurio</string>
+    <string name="parasaurolophus">Parasaurolophus</string>
+    <string name="name">Nombre</string>
+    <string name="img_profile_mini">Miniatura de la imagen de perfil</string>
+    <string name="img_profile_big">Imagen de perfil</string>
+    <string name="save_changes">Guardar cambios</string>
+    <string name="favorites">Favoritos</string>
+    <string name="profile">Perfil</string>
+    <string name="current_password">Contraseña actual</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="dinosaur_planet">Planeta dinosaurio</string>
+
+</resources>

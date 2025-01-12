@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LoginActivity">
+
+    <!--android:background="@drawable/fondo_login"-->
+
+
+    <ImageView
+        android:id="@+id/myBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/login_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/login_padding"
+        android:paddingBottom="@dimen/login_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvLoginTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_icon"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/login_title"
+            android:textColor="@color/main_light"
+            android:textSize="@dimen/register_title"
+            app:layout_constraintBottom_toTopOf="@+id/tilLoginName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLoginName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/user_name_hint"
+            android:textColorHint="@color/main_light"
+            app:boxCollapsedPaddingTop="@dimen/min_margin"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/tilLoginEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLoginTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tielLoginName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-8dp"
+                android:backgroundTint="@color/main_light"
+                android:drawableEnd="@drawable/ic_profile"
+                android:fontFamily="@font/poppins_regular"
+                android:textColorHint="@color/main_light"
+                android:inputType="textCapWords"
+                android:maxLength="50"
+                android:paddingEnd="@dimen/padding_end_input"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/regular_size" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLoginEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_hint"
+            android:textColorHint="@color/main_light"
+            app:endIconDrawable="@drawable/ic_email"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/tilLoginPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilLoginName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tielLoginEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-8dp"
+                android:backgroundTint="@color/main_light"
+                android:textColorHint="@color/main_light"
+                android:drawableEnd="@drawable/ic_email"
+                android:drawableTint="@color/main_light"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="textEmailAddress"
+                android:maxLength="30"
+                android:textColor="@color/main_light"
+                android:paddingEnd="@dimen/padding_end_input"
+                android:textSize="@dimen/regular_size" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLoginPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_hint"
+            android:textColorHint="@color/main_light"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/main_light"
+            app:layout_constraintBottom_toTopOf="@+id/LoginBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilLoginEmail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tielLoginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-8dp"
+                android:backgroundTint="@color/main_light"
+                android:fontFamily="@font/poppins_regular"
+                android:textColorHint="@color/main_light"
+                android:inputType="textPassword"
+                android:maxLength="50"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/regular_size" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/LoginBtn"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/login_padding"
+            android:backgroundTint="@color/neornithischia"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/login"
+            android:textColor="@color/background"
+            android:textSize="@dimen/regular_size"
+            app:layout_constraintBottom_toTopOf="@+id/llChangePage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilLoginPassword"
+            app:strokeColor="@color/neornithischia" />
+
+        <LinearLayout
+            android:id="@+id/llChangePage"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LoginBtn">
+
+            <TextView
+                android:id="@+id/tvLoginAlreadyRegistered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/already_registered"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/min_text" />
+
+            <TextView
+                android:id="@+id/tvLoginNotRegistered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/signin"
+                android:textColor="@color/white"
+                android:textSize="@dimen/min_text" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

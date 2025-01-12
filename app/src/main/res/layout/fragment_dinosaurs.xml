@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/activity_horizontal_padding"
+    tools:context=".ui.fragment.DinosaursFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/etSearch"
+        style="@style/CustomSearchView"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/login_padding"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_input_background"
+        android:focusable="false"
+        app:closeIcon="@drawable/ic_close"
+        app:iconifiedByDefault="false"
+        app:layout_constraintBottom_toTopOf="@+id/gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:searchHintIcon="@null"
+        app:searchIcon="@drawable/ic_search" />
+    <View
+        android:id="@+id/gradient"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:translationZ="2dp"
+        android:background="@drawable/gradient_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSearch"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"
+        android:fillViewport="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSearch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <!-- android:background="@color/background"-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipEpoca"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_details_horizontal_padding"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:backgroundTint="@color/mid_main"
+                android:checkable="true"
+                android:text="Época"
+                android:textAppearance="@style/ChipTextAppearance"
+                android:textColor="@color/main_light"
+                app:chipStrokeColor="@color/chip_stroke_color"
+                app:chipStrokeWidth="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/clLineaTemporal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clLineaTemporal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/chipOrden"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipEpoca">
+
+                <TextView
+                    android:id="@+id/tvTri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Triásico"
+                    android:textColor="@color/main_light"
+                    android:textSize="@dimen/text_curiosity"
+                    app:layout_constraintBottom_toTopOf="@+id/slEras"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvJur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Jurásico"
+                    android:textColor="@color/main_light"
+                    android:textSize="@dimen/text_curiosity"
+                    app:layout_constraintBottom_toTopOf="@+id/slEras"
+                    app:layout_constraintEnd_toStartOf="@+id/tvCre"
+                    app:layout_constraintStart_toEndOf="@+id/tvTri"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Cretácico"
+                    android:textColor="@color/main_light"
+                    android:textSize="@dimen/text_curiosity"
+                    app:layout_constraintBottom_toTopOf="@+id/slEras"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slEras"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="true"
+                    android:stepSize="1"
+                    android:value="0"
+                    android:valueFrom="0"
+                    android:valueTo="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTri" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipOrden"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:backgroundTint="@color/mid_main"
+                android:checkable="true"
+                android:text="Orden"
+                android:textAppearance="@style/ChipTextAppearance"
+                android:textColor="@color/main_light"
+                app:chipStrokeColor="@color/chip_stroke_color"
+                app:chipStrokeWidth="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/clOptionsOrden"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipEpoca" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clOptionsOrden"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipOrden">
+
+                <LinearLayout
+                    android:id="@+id/llSwitchOrden"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/llOptionsOrden"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/min_margin"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Saurischia"
+                        android:textColor="@color/main_light"
+                        android:textSize="@dimen/text_curiosity" />
+
+                    <!--
+                     com.google.android.material.switchmaterial.SwitchMaterial
+                     androidx.appcompat.widget.SwitchCompat
+                     -->
+
+                    <Switch
+                        android:id="@+id/switchOrden"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumbTint="@color/switch_thumb_color"
+                        android:trackTint="@color/switch_track_color"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/min_margin"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Ornitischia"
+                        android:textColor="@color/main_light"
+                        android:textSize="@dimen/text_curiosity" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llOptionsOrden"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llSwitchOrden">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/llBtnsSaurischia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        android:visibility="visible">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroupSaurischia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/btnSauropodomorpha"
+                                style="@style/ChipStyleSauropodomorpha"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/default_margin"
+                                android:checkable="true"
+                                android:text="Sauropodomorpha"
+                                android:textAppearance="@style/ChipTextAppearance"
+                                android:textSize="@dimen/text_curiosity"
+                                app:layout_constraintBottom_toTopOf="@+id/btnTheropoda"
+                                app:layout_constraintEnd_toStartOf="@+id/btnGuaibasauridae"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/btnGuaibasauridae"
+                                style="@style/ChipStyleGuaibasauridae"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/default_margin"
+                                android:checkable="true"
+                                android:text="Guaibasauridae"
+                                android:textAppearance="@style/ChipTextAppearance"
+                                android:textSize="@dimen/text_curiosity"
+                                app:layout_constraintBottom_toTopOf="@+id/btnTheropoda"
+                                app:layout_constraintStart_toEndOf="@+id/btnSauropodomorpha"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/btnTheropoda"
+                                style="@style/ChipStyleTheropoda"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/default_margin"
+                                android:checkable="true"
+                                android:text="Theropoda"
+                                android:textAppearance="@style/ChipTextAppearance"
+                                android:textSize="@dimen/text_curiosity"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/btnGuaibasauridae" />
+                        </com.google.android.material.chip.ChipGroup>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/llBtnsOrnitischia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        android:visibility="gone">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroupOrnitischia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/btnNeornithischia"
+                                style="@style/ChipStyleNeornithischia"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/default_margin"
+                                android:checkable="true"
+                                android:text="Neornithischia"
+                                android:textAppearance="@style/ChipTextAppearance"
+                                android:textSize="@dimen/text_curiosity"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/btnThyreophora"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/btnThyreophora"
+                                style="@style/ChipStyleThyreophora"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/default_margin"
+                                android:checkable="true"
+                                android:text="Thyreophora"
+                                android:textAppearance="@style/ChipTextAppearance"
+                                android:textSize="@dimen/text_curiosity"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/btnNeornithischia"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </com.google.android.material.chip.ChipGroup>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDieta"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:backgroundTint="@color/mid_main"
+                android:checkable="true"
+                android:text="Alimentación"
+                android:textAppearance="@style/ChipTextAppearance"
+                android:textColor="@color/main_light"
+                app:chipStrokeColor="@color/chip_stroke_color"
+                app:chipStrokeWidth="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/llSwitchDiet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clOptionsOrden" />
+
+            <LinearLayout
+                android:id="@+id/llSwitchDiet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:gravity="start"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipDieta">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/min_margin"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Herbívoros"
+
+                    android:textColor="@color/main_light"
+                    android:textSize="@dimen/text_curiosity" />
+
+                <Switch
+                    android:id="@+id/switchDieta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="@color/switch_thumb_color"
+                    android:trackTint="@color/switch_track_color"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/min_margin"
+                    android:fontFamily="@font/poppins_regular"
+
+                    android:text="Carnívoros"
+                    android:textColor="@color/main_light"
+                    android:textSize="@dimen/text_curiosity" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvCleanFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Limpiar filtros"
+                android:textColor="@color/main_light"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llSwitchDiet" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvDinosaurs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/biggest_size"
+                android:nestedScrollingEnabled="false"
+                android:paddingVertical="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCleanFilter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_dinosaurs" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

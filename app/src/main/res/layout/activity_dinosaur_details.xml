@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    tools:context=".ui.activity.DinosaurDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:translationZ="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorGradient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/gradientSolid"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/gradient"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/gradient_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gradientSolid" />
+
+            <TextView
+                android:id="@+id/tvTitleDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_details_horizontal_padding"
+                android:layout_marginTop="@dimen/login_padding"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/general_titles"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/parasaurolophus" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/imgDetailDinosaur"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:layout_marginTop="-40dp"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:contentDescription="@string/description_ilustration"
+            android:src="@drawable/parasaurolophus"
+            android:translationZ="-5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorGradient" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-41dp"
+            android:background="@drawable/top_side_rounded_card_details"
+            android:paddingHorizontal="@dimen/activity_details_horizontal_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgDetailDinosaur">
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/details"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/description_dinosaur" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
+                android:background="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/llDetails"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+            <LinearLayout
+                android:id="@+id/llDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/divider2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clDetails1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/min_margin"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:id="@+id/llEra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toTopOf="@+id/llOrden"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/era"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details" />
+
+                        <TextView
+                            android:id="@+id/tvEra"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/min_margin"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_regular"
+                            android:maxLines="1"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details"
+                            tools:text="@string/cretacico" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llOrden"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toTopOf="@+id/llSuborden"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/llEra">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/orden"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details" />
+
+                        <TextView
+                            android:id="@+id/tvOrden"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/min_margin"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_regular"
+                            android:maxLines="1"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details"
+                            tools:text="@string/ornithischia" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llSuborden"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/llOrden">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/suborden"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details" />
+
+                        <TextView
+                            android:id="@+id/tvSuborden"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/min_margin"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_regular"
+                            android:maxLines="1"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details"
+                            tools:text="@string/neornithischia" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clDetails2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:id="@+id/llDieta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toTopOf="@+id/llTamanyo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/dieta"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details" />
+
+                        <TextView
+                            android:id="@+id/tvDieta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/min_margin"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_regular"
+                            android:maxLines="1"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details"
+                            tools:text="@string/herbivoro" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llTamanyo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toTopOf="@+id/llPeso"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/llDieta">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/tamanyo"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details" />
+
+                        <TextView
+                            android:id="@+id/tvTamanyo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/min_margin"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_regular"
+                            android:maxLines="1"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details"
+                            tools:text="@string/longitud" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llPeso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/llTamanyo">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/peso"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details" />
+
+                        <TextView
+                            android:id="@+id/tvPeso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/min_margin"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_regular"
+                            android:maxLines="1"
+                            android:textColor="@color/main_light"
+                            android:textSize="@dimen/details"
+                            tools:text="@string/toneladas" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
+                android:background="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llDetails" />
+
+            <TextView
+                android:id="@+id/tvDescubre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/descubre"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/details"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/llBtmDescubre"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+            <LinearLayout
+                android:id="@+id/llBtmDescubre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/activity_details_horizontal_padding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescubre">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEraDetail"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:backgroundTint="@color/neornithischia"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/background"
+                    android:textSize="@dimen/hint_size"
+                    app:strokeColor="@color/neornithischia"
+                    tools:text="@string/cerrar_sesion" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnOrdenDetail"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/default_margin"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:backgroundTint="@color/neornithischia"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/cerrar_sesion"
+                    android:textColor="@color/background"
+                    android:textSize="@dimen/hint_size"
+                    app:strokeColor="@color/neornithischia"
+                    tools:text="@string/cerrar_sesion" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

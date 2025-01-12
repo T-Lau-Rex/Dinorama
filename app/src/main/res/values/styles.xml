@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Esto funciona -->
+    <style name="ChipTextAppearance" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">@dimen/details</item> <!-- Ajusta según tu necesidad -->
+    </style>
+
+    <!-- CHIPS de los subórdenes -->
+
+    <style name="ChipStyleSauropodomorpha" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_background_sauropodomorpha</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color_sauropodomorpha</item>
+        <item name="android:textColor">@color/chip_text_suborder</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="ChipStyleGuaibasauridae" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_background_guaibasauridae</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color_guaibasauridae</item>
+        <item name="android:textColor">@color/chip_text_suborder</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="ChipStyleTheropoda" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_background_theropoda</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color_theropoda</item>
+        <item name="android:textColor">@color/chip_text_suborder</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="ChipStyleNeornithischia" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_background_neornithischia</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color_neornithischia</item>
+        <item name="android:textColor">@color/chip_text_suborder</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="ChipStyleThyreophora" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_background_thyreophora</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color_thyreophora</item>
+        <item name="android:textColor">@color/chip_text_suborder</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="DialogEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/main_light</item> <!-- Texto blanco -->
+        <item name="android:textColorHint">@color/main_light</item> <!-- Hint blanco semitransparente -->
+        <item name="android:backgroundTint">@color/main_light</item> <!-- Línea blanca -->
+    </style>
+
+
+    <!-- Estilos de los TextInputLayout del PERFIL -->
+
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <!-- Color del texto del hint y el borde en estado normal -->
+        <item name="boxStrokeColor">@color/transparent</item>
+        <item name="hintTextColor">@color/main_light</item>
+        <!-- Desactivar la línea que aparece -->
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <!-- Color del icono de fin (clear text) -->
+        <item name="endIconTint">@color/main_light</item>
+    </style>
+
+    <!-- Color de la barra de estado -->
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Otros estilos -->
+        <item name="android:statusBarColor">@color/mid_main</item>
+    </style>
+
+    <!-- Esto no sé si funciona -->
+
+    <style name="RoundedButton">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorHint">@color/main_light</item>
+    </style>
+
+</resources>

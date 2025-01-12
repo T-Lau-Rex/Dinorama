@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "283168943179",
+    "firebase_url": "https://dinorama-f3f92-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "dinorama-f3f92",
+    "storage_bucket": "dinorama-f3f92.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283168943179:android:0795ee491b8ca9b175f1ce",
+        "android_client_info": {
+          "package_name": "com.laura.quintodinorama"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2BjI_9OKsdveq3FtvYYEhxZQIPEY-q30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

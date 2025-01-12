@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    tools:context=".ui.fragment.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clCuriosity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/login_padding"
+            android:paddingHorizontal="@dimen/activity_horizontal_padding"
+            app:layout_constraintBottom_toTopOf="@+id/clPopular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvTitleSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/curious_data"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/general_titles"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTitleCurioso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/name_card"
+                app:layout_constraintBottom_toTopOf="@+id/tvInfoCurioso"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleSection"
+                tools:text="@string/dinosaur_planet" />
+
+            <TextView
+                android:id="@+id/tvInfoCurioso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/details"
+                app:layout_constraintBottom_toTopOf="@+id/cardCurioso"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleCurioso"
+                tools:text="@string/info_curiosity" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCurioso"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_marginTop="@dimen/default_margin"
+                android:backgroundTint="@color/transparent"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvInfoCurioso">
+
+                <ImageView
+                    android:id="@+id/imgCurioso"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/parasaurolophus" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPopular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/biggest_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clCuriosity">
+
+            <TextView
+                android:id="@+id/tvPopular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingHorizontal="@dimen/activity_horizontal_padding"
+                android:text="@string/title_popular"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/general_titles"
+                app:layout_constraintBottom_toTopOf="@+id/rcvFavs"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvFavs"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero"
+                android:clipToPadding="false"
+                android:paddingStart="@dimen/activity_horizontal_padding"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopular"
+                tools:listitem="@layout/item_favorite" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

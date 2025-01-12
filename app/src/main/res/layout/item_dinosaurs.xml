@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clItemDino"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="-20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/transparent"
+        android:translationZ="0dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cvImagen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cvImagen">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/viewRoundTarject"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/one_side_rounded_card"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvNameDino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:lines="1"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/name_card"
+                app:layout_constraintBottom_toTopOf="@+id/tvDietDino"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Iguanodon" />
+            <!-- Micropachycephalosaurus hongtuyanensis -->
+
+            <TextView
+                android:id="@+id/tvDietDino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/text_curiosity"
+                app:layout_constraintBottom_toTopOf="@+id/tvEraDino"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvNameDino"
+                tools:text="Herbívoro" />
+
+            <TextView
+                android:id="@+id/tvEraDino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/main_light"
+                android:textSize="@dimen/details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDietDino"
+                tools:text="Cretácico, Hace 201–145 Ma" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvImagen"
+        android:layout_width="160dp"
+        android:layout_height="210dp"
+        android:layout_marginVertical="@dimen/default_margin"
+        android:backgroundTint="@color/transparent"
+        android:outlineAmbientShadowColor="@color/transparent"
+        android:outlineSpotShadowColor="@color/transparent"
+        android:translationZ="1dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="@dimen/min_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/transparent"
+        app:strokeColor="@color/transparent"
+        app:strokeWidth="@dimen/zero">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbFav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
+                android:button="@drawable/states_cb_fav"
+                android:paddingEnd="4dp"
+                android:textColor="@color/main_light"
+                android:translationZ="2dp"
+                android:visibility="visible"
+                app:buttonTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/viewBackground"
+                android:layout_width="140dp"
+                android:layout_height="190dp"
+                android:background="@drawable/rounded_card_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgDinoFav"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:contentDescription="@string/fav_image_description"
+                android:src="@drawable/iguanodon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

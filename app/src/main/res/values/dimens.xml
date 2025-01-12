@@ -1,0 +1,27 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="biggest_size">56dp</dimen>
+    <dimen name="login_padding">36dp</dimen>
+    <dimen name="margin_big">24dp</dimen>
+    <dimen name="activity_details_horizontal_padding">20dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="padding_icon">16dp</dimen>
+    <dimen name="padding_end_input">12dp</dimen>
+    <dimen name="activity_horizontal_padding">10dp</dimen>
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="ellipsis_dot">6dp</dimen>
+    <dimen name="min_margin">4dp</dimen>
+    <dimen name="zero">0dp</dimen>
+
+    <!-- Font sizes -->
+    <dimen name="general_titles">32sp</dimen>
+    <dimen name="register_title">24sp</dimen>
+    <dimen name="name_card">22sp</dimen>
+    <dimen name="regular_size">18sp</dimen>
+    <dimen name="text_curiosity">16sp</dimen>
+    <dimen name="hint_size">16sp</dimen>
+    <dimen name="details">14sp</dimen>
+    <dimen name="min_text">12sp</dimen>
+
+</resources>
