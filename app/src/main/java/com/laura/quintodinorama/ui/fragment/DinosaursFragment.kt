@@ -85,6 +85,7 @@ class DinosaursFragment : Fragment() {
             mBinding.llBtnsOrnitischia.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
     }
+
     // Update layout constraints
     private fun updateConstraints() {
         val constraintBottom = mBinding.root.findViewById<ConstraintLayout>(R.id.contenedor)
@@ -103,12 +104,13 @@ class DinosaursFragment : Fragment() {
         }
         constraintSet.applyTo(constraintBottom)
     }
+
     // Firebase database setup
     private fun setupFirebase() {
         mDinoramaRef = FirebaseDatabase.getInstance().reference.child(DinosaursApplication.PATH_DINOSAURS)
     }
 
-    // RecyclerView adapter setup
+    // Adapter setup
     private fun setupAdapter() {
         val query = mDinoramaRef.orderByChild("name")
 
@@ -205,6 +207,8 @@ class DinosaursFragment : Fragment() {
         } else {
             databaseReference.child("favorite").child(userId).setValue(null)
         }
+
+        // Recalculate the favorites counter
 
         val favoriteRef = databaseReference.child("favorite")
         favoriteRef.addListenerForSingleValueEvent(object : ValueEventListener {

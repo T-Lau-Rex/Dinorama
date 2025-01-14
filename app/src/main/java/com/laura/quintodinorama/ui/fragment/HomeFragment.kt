@@ -35,6 +35,7 @@ import java.util.Calendar
 
 class HomeFragment : Fragment() {
 
+    // Variable initialization
     private var _binding: FragmentHomeBinding? = null
     private val mBinding: FragmentHomeBinding get() = _binding ?: throw IllegalStateException("Binding should not be null")
 
@@ -60,45 +61,13 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
     }
 
+    // Firebase database setup
     private fun setupFirebase() {
         mDinoramaRef = FirebaseDatabase.getInstance().reference.child(DinosaursApplication.PATH_DINOSAURS)
         mCuriositiesRef = FirebaseDatabase.getInstance().reference.child(DinosaursApplication.CURIOSITIES)
     }
 
-    private fun setupCuriosity() {
-        mCuriositiesRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val curiosity = snapshot.children.sortedBy { it.key?.toIntOrNull() }
-                    val totalCuriosities = curiosity.size
-
-                    if (totalCuriosities > 0) {
-                        // Calcula el índice basado en el día del año
-                        val dayOfYear = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
-                        val curiosityIndex = dayOfYear % totalCuriosities
-
-                        val dayCuriosity = curiosity[curiosityIndex]
-                        val description = dayCuriosity.child("description").value.toString()
-                        val title = dayCuriosity.child("title").value.toString()
-                        val image = dayCuriosity.child("image").value.toString()
-
-                        mBinding.tvTitleCurioso.text = title
-                        mBinding.tvInfoCurioso.text = description
-                        Glide.with(this@HomeFragment)
-                            .load(image)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .centerCrop()
-                            .into(mBinding.imgCurioso)
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Snackbar.make(mBinding.root, "Error: ${error.message}", Snackbar.LENGTH_SHORT).show()
-            }
-        })
-    }
-
+    // Adapter setup
     private fun setupAdapter() {
         val query = mDinoramaRef.orderByChild("favoriteCount").limitToFirst(10)
 
@@ -129,7 +98,7 @@ class HomeFragment : Fragment() {
                         tvNameFav.text = dinosaur.name
                         cbFav.text = dinosaur.favorite.keys.size.toString()
                         FirebaseAuth.getInstance().currentUser?.let {
-                            cbFav.isChecked = dinosaur.favorite.containsKey(it.uid) // TODO: Marcado si es favorito del usuario
+                            cbFav.isChecked = dinosaur.favorite.containsKey(it.uid)
                         }
 
                         val colorBackground = DinosaursApplication.suborderColor[dinosaur.suborder]
@@ -155,6 +124,42 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Curiosity of the day setup
+    private fun setupCuriosity() {
+        mCuriositiesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val curiosity = snapshot.children.sortedBy { it.key?.toIntOrNull() }
+                    val totalCuriosities = curiosity.size
+
+                    if (totalCuriosities > 0) {
+                        // Calculates the index based on the day of the year
+                        val dayOfYear = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
+                        val curiosityIndex = dayOfYear % totalCuriosities
+
+                        val dayCuriosity = curiosity[curiosityIndex]
+                        val description = dayCuriosity.child("description").value.toString()
+                        val title = dayCuriosity.child("title").value.toString()
+                        val image = dayCuriosity.child("image").value.toString()
+
+                        mBinding.tvTitleCurioso.text = title
+                        mBinding.tvInfoCurioso.text = description
+                        Glide.with(this@HomeFragment)
+                            .load(image)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .centerCrop()
+                            .into(mBinding.imgCurioso)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Snackbar.make(mBinding.root, "Error: ${error.message}", Snackbar.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    // Set up the RecyclerView
     private fun setupRecyclerView() {
         mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rcvFavs.apply {
@@ -169,11 +174,7 @@ class HomeFragment : Fragment() {
         mFirebaseAdapter.startListening()
     }
 
-    /*override fun onStop() { TODO: Creo recordar que esto me estaba dando problemas
-        super.onStop()
-        mFirebaseAdapter.stopListening()
-    }*/
-
+    // Function to mark/unmark a dinosaur as favorite
     private fun setFavorite(dinosaur: Dinosaur, checked: Boolean) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val databaseReference = mDinoramaRef.child(dinosaur.id)

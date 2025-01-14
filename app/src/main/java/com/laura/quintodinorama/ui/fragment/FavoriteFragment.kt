@@ -32,6 +32,7 @@ import com.laura.quintodinorama.ui.activity.DinosaurDetailsActivity
 
 class FavoriteFragment : Fragment() {
 
+    // Variable initialization
     private var _binding: FragmentFavoriteBinding? = null
     private val binding: FragmentFavoriteBinding get() = _binding ?: throw IllegalStateException("Binding should not be null")
 
@@ -43,15 +44,7 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //val favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
-
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        //val root: View = binding.root
-
-        /*val textView: TextView = binding.textFavorite
-        favoriteViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }*/
         return binding.root
     }
 
@@ -63,10 +56,12 @@ class FavoriteFragment : Fragment() {
         setupRecyclerView()
     }
 
+    // Firebase database setup
     private fun setupFirebase() {
         mDinoramaRef = FirebaseDatabase.getInstance().reference.child(DinosaursApplication.PATH_DINOSAURS)
     }
 
+    // Adapter setup
     private fun setupAdapter() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val query = mDinoramaRef.orderByChild("favorite/$userId").equalTo(true)
@@ -96,13 +91,9 @@ class FavoriteFragment : Fragment() {
 
                     with(binding) {
                         tvNameFav.text = dinosaur.name
+                        cbFav.isChecked = true
 
-                        cbFav.isChecked = true // TODO: Siempre marcado por ser favoritos
-                        // pero comprobar si funciona bien
-
-                        /*FirebaseAuth.getInstance().currentUser?.let {
-                            cbFav.isChecked = dinosaur.favorite.containsKey(it.uid)
-                        }*/
+                        // Change the dinosaur's background according to its suborder
                         val colorBackground = DinosaursApplication.suborderColor[dinosaur.suborder]
                             ?: DinosaursApplication.suborderColor["eraDefault"]!!
 
@@ -120,8 +111,8 @@ class FavoriteFragment : Fragment() {
         }
     }
 
+    // Set up the RecyclerView with grid layout
     private fun setupRecyclerView() {
-        //mGridLayoutManager = GridLayoutManager(this, resources.getInteger(R.integer.mai))
         mGridLayoutManager = GridLayoutManager(context, 2)
         binding.rcvFavs.apply {
             layoutManager = mGridLayoutManager
@@ -134,6 +125,7 @@ class FavoriteFragment : Fragment() {
         mFirebaseAdapter.startListening()
     }
 
+    // Function to mark/unmark a dinosaur as favorite
     private fun setFavorite(dinosaur: Dinosaur, checked: Boolean) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val databaseReference = mDinoramaRef.child(dinosaur.id)//.child("favorite")
@@ -146,6 +138,7 @@ class FavoriteFragment : Fragment() {
 
         val favoriteRef = databaseReference.child("favorite")
 
+        // Recalculate the favorites counter
         favoriteRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val favoriteLength = snapshot.childrenCount
@@ -156,15 +149,6 @@ class FavoriteFragment : Fragment() {
                 Log.i("setFavorite", "Error counting favorites: ${error.message}")
             }
         })
-
-        /*val databaseReference = FirebaseDatabase.getInstance().reference.child("dinorama")
-        if (checked) {
-            databaseReference.child(dinosaur.id).child("favorite")
-                .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(checked)
-        } else {
-            databaseReference.child(dinosaur.id).child("favorite")
-                .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
-        }*/
     }
 
     inner class DinosaurHolder(view: View): RecyclerView.ViewHolder(view) {

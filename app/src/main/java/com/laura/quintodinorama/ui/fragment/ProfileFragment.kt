@@ -43,47 +43,75 @@ import com.laura.quintodinorama.ui.activity.MainActivity
 
 class ProfileFragment : Fragment() {
 
+    // Variable initialization
     private var _binding: FragmentProfileBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding: FragmentProfileBinding get() = _binding ?: throw IllegalStateException("Binding should not be null")
 
     private val userUid = FirebaseAuth.getInstance().currentUser?.uid
     private lateinit var mStorageReference: StorageReference
-    private lateinit var mDinoramaRef: DatabaseReference /* TODO: Esto puede que no haga falta porque es para subirlo a Realtime Database*/
+    private lateinit var mDinoramaRef: DatabaseReference
 
     private val RC_GALLERY = 18
-    private val PATH_PROFILE_PHOTO = "profile/${userUid}/photo" // TODO: Comprobar si funciona
-
+    private val PATH_PROFILE_PHOTO = "profile/${userUid}/photo"
     private var imageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //val profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        //val root: View = binding.root
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imgIconPhoto.setOnClickListener { setupChangeImageCard() }
-        binding.iconEditNameCorreo.setOnClickListener { setupChangeInfo() }
 
+        // Initial setup
         mStorageReference = FirebaseStorage.getInstance().reference
-        mDinoramaRef =
-            FirebaseDatabase.getInstance().reference.child(PATH_PROFILE_PHOTO) // TODO: De nuevo, creo que no hace falta
+        mDinoramaRef = FirebaseDatabase.getInstance().reference.child(PATH_PROFILE_PHOTO)
 
         setupProfileImage()
         setupInfo()
+
+        // Setting up click event listeners
+
+        binding.imgIconPhoto.setOnClickListener { setupChangeImageCard() }
+        binding.iconEditNameCorreo.setOnClickListener { setupChangeInfo() }
+
         setupBtnLogOut()
         setupBtnDeleteAccount()
     }
+
+    // Initial setup of the profile image
+
+    private fun setupProfileImage() {
+        mDinoramaRef.child("url").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val imageUrl = snapshot.getValue(String::class.java)
+                if (!imageUrl.isNullOrEmpty()) {
+                    Glide.with(this@ProfileFragment)
+                        .load(imageUrl)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .transform(CircleCrop())
+                        .into(binding.imgIconPhoto)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context, "Error al cargar la imagen de perfil", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
+    }
+
+    // Setting up the user's name and email
+
+    private fun setupInfo() {
+        binding.tvName.text = DinosaursApplication.currentUser?.displayName
+        binding.tvMail.text = DinosaursApplication.currentUser?.email
+    }
+
+    // Setting up the image change functionality
 
     private fun setupChangeImageCard() {
         binding.clChangePhoto.visibility = View.VISIBLE
@@ -116,35 +144,62 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun setupProfileImage() {
-        mDinoramaRef.child("url").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val imageUrl = snapshot.getValue(String::class.java)
-                if (!imageUrl.isNullOrEmpty()) {
-                    Glide.with(this@ProfileFragment)
-                        .load(imageUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .transform(CircleCrop())
-                        .into(binding.imgIconPhoto)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context, "Error al cargar la imagen de perfil", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
-    }
+    // Open the gallery to select a new photo
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, RC_GALLERY)
     }
 
-    private fun setupInfo() {
-        binding.tvName.text = DinosaursApplication.currentUser?.displayName
-        binding.tvMail.text = DinosaursApplication.currentUser?.email
+    // Save the selected profile photo
+
+    private fun savePhotoProfile() {
+
+        if (imageUri != null) {
+            Glide.with(this)
+                .load(imageUri)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(CircleCrop())
+                .into(binding.imgIconPhoto)
+
+            postPhotoProfile()
+        }
+
+        binding.iconEditNameCorreo.visibility = View.VISIBLE
+        binding.clChangePhoto.visibility = View.GONE
     }
+
+    // Upload the selected photo to Firebase Storage and update the database with its URL
+
+    private fun postPhotoProfile() {
+        imageUri?.let { uri ->
+            val storageReference = mStorageReference.child(PATH_PROFILE_PHOTO).child("my_photo")
+
+            storageReference.putFile(uri).addOnSuccessListener {
+                storageReference.downloadUrl.addOnSuccessListener { downloadUrl ->
+                    mDinoramaRef.child("url").setValue(downloadUrl.toString())
+                        .addOnSuccessListener {
+                            Toast.makeText(context, "Foto de perfil guardada", Toast.LENGTH_SHORT).show()
+                            Glide.with(this)
+                                .load(downloadUrl.toString())
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .transform(CircleCrop())
+                                .into(binding.imgIconPhoto)
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(context, "Error al guardar la URL en la base de datos", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+                .addOnFailureListener {
+                    Toast.makeText(context, "La foto no se ha podido subir, inténtalo más tarde", Toast.LENGTH_SHORT).show()
+                }
+        } ?: run {
+            Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Setting up the information change functionality
 
     private fun setupChangeInfo() {
         binding.clChangeData.visibility = View.VISIBLE
@@ -183,25 +238,36 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    // Display the password change form and configure the action to close the form
+
+    private fun updatePassword() {
+        binding.clChangeData.visibility = View.GONE
+        binding.btnCloseChangePass.setOnClickListener {
+            binding.clChangePass.visibility = View.GONE
+            binding.clChangeData.visibility = View.VISIBLE
+        }
+    }
+
+    // Update the user's name and email in Firebase Authentication
     private fun saveInfo() {
         val newName = binding.tielNameChange.text.toString().trim()
         val newMail = binding.tielMailChange.text.toString().trim()
 
-        // Comprueba que los campos no estén vacíos
+        // Check that the fields are not empty
         if (newName.isEmpty() || newMail.isEmpty()) {
             Toast.makeText(context, "Rellena todos los campo", Toast.LENGTH_SHORT).show()
             return
         }
         val user = DinosaursApplication.currentUser
 
-        // Actualizar nombre usuario
+        // Update the user's name
         val profileName = userProfileChangeRequest {
             displayName = newName
         }
 
         user?.updateProfile(profileName)?.addOnCompleteListener { nameTask ->
             if (nameTask.isSuccessful) {
-                // Actualizar correo
+                // Update the email
                 user.updateEmail(newMail).addOnCompleteListener { mailTask ->
                     if (mailTask.isSuccessful) {
                         Toast.makeText(
@@ -230,13 +296,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun updatePassword() {
-        binding.clChangeData.visibility = View.GONE
-        binding.btnCloseChangePass.setOnClickListener {
-            binding.clChangePass.visibility = View.GONE
-            binding.clChangeData.visibility = View.VISIBLE
-        }
-    }
+    // Setting up the logout button
 
     private fun setupBtnLogOut() {
         binding.btnLogOut.setOnClickListener {
@@ -254,6 +314,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    // Log out the current user and redirect to the Login screen
     private fun LogOut() {
         context?.let { context ->
             AuthUI.getInstance().signOut(context)
@@ -270,6 +331,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    // Setting up the account deletion button
     private fun setupBtnDeleteAccount() {
         binding.btnDeleteAccount.setOnClickListener {
             context?.let {
@@ -286,6 +348,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    // Delete the current user's account after re-authenticating with Firebase Authentication
     private fun deleteAccount() {
         val user = DinosaursApplication.currentUser
 
@@ -299,6 +362,7 @@ class ProfileFragment : Fragment() {
                 val email = user.email!!
                 val credential = EmailAuthProvider.getCredential(email, password)
 
+                // Reauthenticate the user with the provided credentials, and if correct, delete the account and redirect to the login screen
                 user.reauthenticate(credential).addOnCompleteListener { reauthTask ->
                     if (reauthTask.isSuccessful) {
                         user.delete()
@@ -313,7 +377,6 @@ class ProfileFragment : Fragment() {
                                 }
                             }
                     } else {
-                        //Toast.makeText(context, "Error al reautenticar: ${reauthTask.exception?.message}", Toast.LENGTH_SHORT).show()
                         val exception = reauthTask.exception
                         if (exception is FirebaseAuthInvalidCredentialsException) {
                             Toast.makeText(context, "Contraseña incorrecta. Por favor, inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
@@ -322,29 +385,13 @@ class ProfileFragment : Fragment() {
                         }
                     }
                 }
-
             }
         } ?: run {
             Toast.makeText(context, "Error: Usuario no encontrado", Toast.LENGTH_SHORT).show()
         }
-
-        /*user?.let {
-            user.delete()
-                .addOnCompleteListener {task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(context, "Cuenta eliminada correctamente", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(context, LoginActivity::class.java))
-                        activity?.finish()
-                    } else {
-                        Toast.makeText(context, "Error al eliminar cuenta ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-        } ?: run {
-            Toast.makeText(context, "Error: Usuario no encontrado", Toast.LENGTH_SHORT).show()
-        }*/
-
     }
 
+    // Prompt the user to enter their current password before performing critical changes
     private fun promptForPassword(callback: (String) -> Unit) {
         val input = EditText(context).apply {
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
@@ -367,51 +414,6 @@ class ProfileFragment : Fragment() {
             .create()
         dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
         dialog.show()
-    }
-
-    private fun savePhotoProfile() {
-
-        if (imageUri != null) {
-            Glide.with(this)
-                .load(imageUri)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(CircleCrop())
-                .into(binding.imgIconPhoto)
-
-            postPhotoProfile()
-        }
-
-        binding.iconEditNameCorreo.visibility = View.VISIBLE
-        binding.clChangePhoto.visibility = View.GONE
-    }
-
-    private fun postPhotoProfile() {
-        //mStorageReference.child(PATH_PROFILE_PHOTO).child("my_photo")
-        imageUri?.let { uri ->
-            val storageReference = mStorageReference.child(PATH_PROFILE_PHOTO).child("my_photo")
-
-            storageReference.putFile(uri).addOnSuccessListener {
-                storageReference.downloadUrl.addOnSuccessListener { downloadUrl ->
-                    mDinoramaRef.child("url").setValue(downloadUrl.toString())
-                        .addOnSuccessListener {
-                            Toast.makeText(context, "Foto de perfil guardada", Toast.LENGTH_SHORT).show()
-                            Glide.with(this)
-                                .load(downloadUrl.toString())
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .transform(CircleCrop())
-                                .into(binding.imgIconPhoto)
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(context, "Error al guardar la URL en la base de datos", Toast.LENGTH_SHORT).show()
-                        }
-                }
-            }
-                .addOnFailureListener {
-                    Toast.makeText(context, "La foto no se ha podido subir, inténtalo más tarde", Toast.LENGTH_SHORT).show()
-                }
-        } ?: run {
-            Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
